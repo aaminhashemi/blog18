@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        \RolePermission\Providers\RolePermissionServiceProvider::class,
         \Slider\Providers\SliderServiceProvider::class,
         \Uploader\Providers\UploaderServiceProvider::class,
         \User\Providers\UserServiceProvider::class,

@@ -34,6 +34,7 @@
             "Category\\":"modules/Category",
             "Attribute\\":"modules/Attribute",
             "Product\\":"modules/Product",
+            "RolePermission\\":"modules/RolePermission",
             "Database\\Seeders\\": "database/seeders/"
         }
     },

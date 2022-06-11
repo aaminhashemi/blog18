@@ -21,6 +21,10 @@ import Brands from "./components/Brands";
 import CreateBrands from "./components/CreateBrands";
 import Attributes from "./components/Attributes";
 import CreateAttributes from "./components/CreateAttributes";
+import Permissions from "./components/Permissions";
+import CreatePermissions from "./components/CreatePermissions";
+import Roles from "./components/Roles";
+import CreateRoles from "./components/CreateRoles";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 
@@ -42,9 +46,13 @@ function Index() {
                 <Route path="/home" element={<Main/>} >
                 <Route path="/home/books" element={<Books/>} />
                 <Route path="/home/categories" element={<Categories/>} />
+                <Route path="/home/permissions" element={<Permissions/>} />
+                <Route path="/home/roles" element={<Roles/>} />
                 <Route path="/home/brands" element={<Brands/>} />
                 <Route path="/home/attributes" element={<Attributes/>} />
                 <Route path="/home/brands/create" element={<CreateBrands/>} />
+                <Route path="/home/roles/create" element={<CreateRoles/>} />
+                <Route path="/home/permissions/create" element={<CreatePermissions/>} />
                 <Route path="/home/attributes/create" element={<CreateAttributes/>} />
                 <Route path="/home/books/create" element={<CreateBooks/>} />
                 <Route path="/home/categories/create" element={<CreateCategories/>} />

@@ -1,46 +1,63 @@
-import React,{useEffect,useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CreateCategories = () => {
+const CreateRoles = () => {
     //const history = useHistory();
-    const [picture, setPicture] = useState([]);
+
     const [loading, setLoading] = useState(true);
-    const [categoriesList, setCategoriesList] = useState([]);
+    let selectedPermissions = [];
+    const [permissionsList, setPermissionsList] = useState([]);
     const [createInput, setCreateInput] = useState({
         name: '',
-        category_id: '',
         errors_list: []
 
     });
-    const inputSetter=(e)=>{
-        setCreateInput({...createInput, [e.target.name]: e.target.value})
-    }
     useEffect(() => {
-        axios.get(`/api/category/list`).then(res => {
+        axios.get(`/api/permission/list`).then(res => {
             if (res.data.status === 200) {
-                setCategoriesList(res.data.categories);
+                setPermissionsList(res.data.permissions);
                 setLoading(false);
             }
         })
     }, []);
-    var categories = '';
+    const checkbox = (e) => {
+        if(e.target.checked){
+            selectedPermissions.push(e.target.value);
+        }else{
+            selectedPermissions = selectedPermissions.filter(item => item !== e.target.value)
+            //selectedPermissions.splice(index, selectedPermissions.indexOf(e.target.value));
+        }
+        console.log(selectedPermissions)
+        //setCreateInput({...createInput, [e.target.name]: e.target.value})
+    }
+    var permissions = '';
     if (loading) {
-        categories = ''
+        permissions = ''
     } else {
-        categories = categoriesList.map((item, index) => {
+        permissions = permissionsList.map((item, index) => {
             return (
-                <option key={item.id} value={item.id}>{item.name}</option>
+                <div key={item.id}>
+                    <input type="checkbox" id={item.name} name="permission" value={item.name} onChange={checkbox}/>
+                    <label htmlFor={item.name}> {item.name}</label><br/>
+                </div>
             )
         })
     }
+    const inputSetter = (e) => {
+        setCreateInput({...createInput, [e.target.name]: e.target.value})
+    }
+
+
     const submit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('file', picture.image);
-        formData.append('name', createInput.name);
-        formData.append('category_id', createInput.category_id);
-        axios.post(`/api/category/save`, formData).then(res => {
+        formData.append('title', createInput.name);
+        //formData.append('permissions[]', selectedPermissions);
+        selectedPermissions.forEach(function(value) {
+            formData.append("permissions[]", value) // you have to add array symbol after the key name
+        })
+        axios.post(`/api/role/save`, formData).then(res => {
             if (res.data.status === 200) {
                 Swal.fire({
                     title: 'موفقیت آمیز',
@@ -69,49 +86,35 @@ const CreateCategories = () => {
         setPicture({image: e.target.files[0]})
     };
 
-    return(
+    return (
 
         <>
             <div className="alert alert-primary" role="alert">
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
-            <div className='col-lg-6 mx-0 my-0 px-2 py-2' style={{'backgroundColor':'white'}}>
+            <div className='col-lg-6 mx-0 my-0 px-2 py-2' style={{'backgroundColor': 'white'}}>
 
                 <div className="card row col-lg-12 mx-1">
                     <div className="card-body">
-                        <h5 className="card-title">افزودن دسته بندی جدید</h5>
-                        {/*
-                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-*/}
+                        <h5 className="card-title">افزودن دسترسی</h5>
                         <form onSubmit={submit} method='post' className='col-lg-12'>
                             <div className="mb-3 row">
-                                <label className="col-sm-3">نام دسته بندی</label>
+                                <label className="col-sm-3">نام نقش</label>
                                 <div className="col-sm-6">
                                     <input type="text" name='name' className="form-control"
-                                           value={createInput.name} onChange={inputSetter} />
+                                           value={createInput.name} onChange={inputSetter}/>
                                 </div>
                             </div>
                             <div className="mb-3 row">
-                                <label className="col-sm-3">نام دسته بندی</label>
+                                <label className="col-sm-3">دسترسی ها</label>
                                 <div className="col-sm-6">
-                                    <select type="text" name='category_id' className="form-control"
-                                            value={createInput.category_id} onChange={inputSetter} >
-                                        <option value="">ندارد</option>
-                                        {categories}
-                                    </select>
+                                    {permissions}
                                 </div>
                             </div>
-                            <div className="mb-3 row">
-                                <label className="col-sm-3">تصویر</label>
-                                <div className="col-sm-6">
-                                    <input type="file" className="form-control"  name='image' onChange={handleImage} />
-                                </div>
-                            </div>
-
                             <div className="mb-3 row">
                                 <div className="col-lg-3"></div>
                                 <div className="col-lg-2">
-                                    <button  className="btn btn-success" >افزودن</button>
+                                    <button className="btn btn-success">افزودن</button>
                                 </div>
                             </div>
                         </form>
@@ -124,4 +127,4 @@ const CreateCategories = () => {
     )
 }
 
-export default CreateCategories;
+export default CreateRoles;

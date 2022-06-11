@@ -13,7 +13,7 @@ const Login = () => {
     }
     const submit=(e)=>{
         e.preventDefault()
-        axios.post(`/api/users/login`,createInput).then((res)=>{
+        axios.post(`/api/login`,createInput).then((res)=>{
             if(res.data.status===200){
                 localStorage.setItem('token',res.data.token)
             }else{

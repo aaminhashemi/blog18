@@ -71,18 +71,21 @@ const CreateBrands = () => {
 
 
     return(
-     <div className='col-lg-10 mx-0 my-0 px-2 py-2' style={{'backgroundColor':'white'}}>
+     <div className='col-lg-6 mx-0 my-0 px-2 py-2' style={{'backgroundColor':'white'}}>
+         <div className="card row col-lg-12 mx-1">
+             <div className="card-body">
+                 <h5 className="card-title">افزودن برند جدید</h5>
          <form onSubmit={submit} method='post' className='col-lg-6'>
              <div className="mb-3 row">
-                 <label  className="col-sm-2 col-form-label">نام دسته بندی</label>
-                 <div className="col-sm-10">
+                 <label  className="col-sm-3 col-form-label">نام برند</label>
+                 <div className="col-sm-9">
                      <input type="text" name='name' className="form-control"
                             value={createInput.name} onChange={inputSetter} />
                  </div>
              </div>
              <div className="mb-3 row">
-                 <label  className="col-sm-2 col-form-label">وضعیت</label>
-                 <div className="col-sm-10">
+                 <label  className="col-sm-3 col-form-label">وضعیت</label>
+                 <div className="col-sm-9">
                      <label>
                          فعال
                          <input type='radio' name='status' value='active' onChange={inputSetter}/>
@@ -107,6 +110,9 @@ const CreateBrands = () => {
                  </div>
              </div>
          </form>
+             </div>
+         </div>
+
      </div>
     )
 }

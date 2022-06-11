@@ -2,7 +2,9 @@ import {useState} from "react";
 
 const Register = () => {
     const [createInput, setCreateInput] = useState({
-        name: '',
+        first_name: '',
+        last_name: '',
+        mobile: '',
         email: '',
         password: '',
         errors_list: []
@@ -12,7 +14,7 @@ const Register = () => {
     }
     const submit=(e)=>{
         e.preventDefault()
-        axios.post(`/api/users/create`,createInput).then((res)=>{
+        axios.post(`/api/register`,createInput).then((res)=>{
             if(res.data.status===200){
                 alert('ok')
             }else{
@@ -28,8 +30,22 @@ const Register = () => {
                  <div className="mb-3 row d-flex flex-md-row">
                      <label  className="col-sm-2 col-form-label">نام</label>
                      <div className="col-sm-10">
-                         <input type="text" name='name' className="form-control"
-                                value={createInput.name} onChange={inputSetter} />
+                         <input type="text" name='first_name' className="form-control"
+                                value={createInput.first_name} onChange={inputSetter} />
+                     </div>
+                 </div>
+                 <div className="mb-3 row d-flex flex-md-row">
+                     <label  className="col-sm-2 col-form-label">نام خانوادگی</label>
+                     <div className="col-sm-10">
+                         <input type="text" name='last_name' className="form-control"
+                                value={createInput.last_name} onChange={inputSetter} />
+                     </div>
+                 </div>
+                 <div className="mb-3 row d-flex flex-md-row">
+                     <label  className="col-sm-2 col-form-label">موبایل</label>
+                     <div className="col-sm-10">
+                         <input type="text" name='mobile' className="form-control"
+                                value={createInput.mobile} onChange={inputSetter} />
                      </div>
                  </div>
                  <div className="mb-3 row d-flex flex-md-row">

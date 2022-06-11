@@ -8,7 +8,7 @@ const Brands = () => {
     const [loading, setLoading] = useState(true)
     const [brands, setBrands] = useState([])
     useEffect(() => {
-        axios.get(`/api/brands`).then((res) => {
+        axios.get(`/api/brand/list`).then((res) => {
             setBrands(res.data.brands)
             setLoading(false)
         })

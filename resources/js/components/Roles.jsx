@@ -1,15 +1,16 @@
 import {useEffect, useState} from "react";
 import ZeroTableRows from "./ZeroTableRows";
 import Receiving from "./Receiving";
-import Category from "./Category";
+import Role from "./Role";
 
-const Categories = () => {
+const Roles = () => {
     const [loading, setLoading] = useState(true)
-    const [categories, setCategories] = useState([])
+    const [roles, setRoles] = useState([])
     useEffect(() => {
-        axios.get(`/api/category/list`).then((res) => {
-            setCategories(res.data.categories)
+        axios.get(`/api/role/list`).then((res) => {
+            setRoles(res.data.roles)
             setLoading(false)
+            //console.log(permissions)
         })
     }, [])
     if (loading) {
@@ -21,31 +22,29 @@ const Categories = () => {
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
             {
-                categories.length !== 0 ?
+                roles.length !== 0 ?
                     <table className='table border table-hover table-striped'>
                         <thead>
                         <tr>
                             <td>نام</td>
-                            <td>والد</td>
-                            <td>تصویر</td>
+                            <td>دسترسی ها</td>
                             <td>عملیات</td>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            categories.map((item, index) => {
+                            roles.map((item, index) => {
                                 return (
-                                    <Category item={item} key={index}/>
+                                    <Role item={item} key={index}/>
                                 )
                             })
                         }
                         </tbody>
                     </table>
-                    : <ZeroTableRows title='دسته بندی'/>
+                    : <ZeroTableRows title='نقش کاربری'/>
             }
         </div>
-
     )
 }
 
-export default Categories;
+export default Roles;

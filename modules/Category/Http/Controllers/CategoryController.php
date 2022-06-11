@@ -25,7 +25,13 @@ class CategoryController extends Controller
     {
         $this->repository = $categoryRepository;
     }
+    /////////////////////////////////////////////////
+    public function menu()
+    {
+        return response()->json(['menu' => config('sidebar')]);
+    }
 
+    ////////////////////////////////////////////////
     public function index()
     {
         $categories = $this->repository->allCategories();

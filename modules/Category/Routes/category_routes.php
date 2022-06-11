@@ -16,9 +16,11 @@ Route::group(['namespace' => 'Category\Http\Controllers','prefix'=>'api'], funct
     $router->post('/categories/brand/{id}/delete','CategoryController@deleteBrand');
     $router->post('//category/save/score','CategoryController@saveScore');
 
+    $router->get('/menu','CategoryController@menu');
 
 
-   // /categories/${id}/brand/${item}/delete
+
+    // /categories/${id}/brand/${item}/delete
 });
 /*Route::get('/category/list',[CategoryController::class,'index']);
 Route::post('/category/{category}/delete',[CategoryController::class,'delete']);
