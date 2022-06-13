@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import ZeroTableRows from "./ZeroTableRows";
-import Receiving from "./Receiving";
-import Category from "./Category";
+import ZeroTableRows from "../ZeroTableRows";
+import Receiving from "../Receiving";
+import Category from "../Category/Category";
 
 const Attributes = () => {
     const [loading, setLoading] = useState(true)

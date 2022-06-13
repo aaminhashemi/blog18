@@ -1,16 +1,15 @@
 import {useEffect, useState} from "react";
-import ZeroTableRows from "./ZeroTableRows";
-import Receiving from "./Receiving";
-import Role from "./Role";
+import ZeroTableRows from "../ZeroTableRows";
+import Receiving from "../Receiving";
+import Category from "./Category";
 
-const Roles = () => {
+const Categories = () => {
     const [loading, setLoading] = useState(true)
-    const [roles, setRoles] = useState([])
+    const [categories, setCategories] = useState([])
     useEffect(() => {
-        axios.get(`/api/role/list`).then((res) => {
-            setRoles(res.data.roles)
+        axios.get(`/api/category/list`).then((res) => {
+            setCategories(res.data.categories)
             setLoading(false)
-            //console.log(permissions)
         })
     }, [])
     if (loading) {
@@ -22,29 +21,31 @@ const Roles = () => {
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
             {
-                roles.length !== 0 ?
+                categories.length !== 0 ?
                     <table className='table border table-hover table-striped'>
                         <thead>
                         <tr>
                             <td>نام</td>
-                            <td>دسترسی ها</td>
+                            <td>والد</td>
+                            <td>تصویر</td>
                             <td>عملیات</td>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            roles.map((item, index) => {
+                            categories.map((item, index) => {
                                 return (
-                                    <Role item={item} key={index}/>
+                                    <Category item={item} key={index}/>
                                 )
                             })
                         }
                         </tbody>
                     </table>
-                    : <ZeroTableRows title='نقش کاربری'/>
+                    : <ZeroTableRows title='دسته بندی'/>
             }
         </div>
+
     )
 }
 
-export default Roles;
+export default Categories;

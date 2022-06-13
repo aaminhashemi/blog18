@@ -1,16 +1,16 @@
 import {useEffect, useState} from "react";
-import ZeroTableRows from "./ZeroTableRows";
-import Receiving from "./Receiving";
-import Category from "./Category";
-import Brand from "./Brand";
+import ZeroTableRows from "../ZeroTableRows";
+import Receiving from "../Receiving";
+import Permission from "./Permission";
 
-const Brands = () => {
+const Permissions = () => {
     const [loading, setLoading] = useState(true)
-    const [brands, setBrands] = useState([])
+    const [permissions, setPermissions] = useState([])
     useEffect(() => {
-        axios.get(`/api/brand/list`).then((res) => {
-            setBrands(res.data.brands)
+        axios.get(`/api/permission/list`).then((res) => {
+            setPermissions(res.data.permissions)
             setLoading(false)
+            //console.log(permissions)
         })
     }, [])
     if (loading) {
@@ -22,31 +22,28 @@ const Brands = () => {
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
             {
-                brands.length !== 0 ?
+                permissions.length !== 0 ?
                     <table className='table border table-hover table-striped'>
                         <thead>
                         <tr>
                             <td>نام</td>
-                            <td>والد</td>
-                            <td>تصویر</td>
                             <td>عملیات</td>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            brands.map((item, index) => {
+                            permissions.map((item, index) => {
                                 return (
-                                    <Brand item={item} key={index}/>
+                                    <Permission item={item} key={index}/>
                                 )
                             })
                         }
                         </tbody>
                     </table>
-                    : <ZeroTableRows title='برند'/>
+                    : <ZeroTableRows title='دسترسی'/>
             }
         </div>
-
     )
 }
 
-export default Brands;
+export default Permissions;

@@ -8,23 +8,23 @@ import {getBooks} from './data/data'
 import './../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import  './../../node_modules/font-awesome/css/font-awesome.min.css'
 import './../css/app.css'
-import Books from "./components/Books";
-import Main from "./components/Main";
-import CreateBooks from "./components/CreateBooks";
-import EditBook from "./components/EditBook";
-import Login from "./components/Login";
+import Books from "./Components/Books";
+import Main from "./Components/Main";
+import CreateBooks from "./Components/CreateBooks";
+import EditBook from "./Components/EditBook";
+import Login from "./Components/Auth/Login";
 import axios from "axios";
-import Register from "./components/Register";
-import Categories from "./components/Categories";
-import CreateCategories from "./components/CreateCategories";
-import Brands from "./components/Brands";
-import CreateBrands from "./components/CreateBrands";
-import Attributes from "./components/Attributes";
-import CreateAttributes from "./components/CreateAttributes";
-import Permissions from "./components/Permissions";
-import CreatePermissions from "./components/CreatePermissions";
-import Roles from "./components/Roles";
-import CreateRoles from "./components/CreateRoles";
+import Register from "./Components/Auth/Register";
+import Categories from "./Components/Category/Categories";
+import CreateCategories from "./Components/Category/CreateCategories";
+import Brands from "./Components/Brand/Brands";
+import CreateBrands from "./Components/Brand/CreateBrands";
+import Attributes from "./Components/Attribute/Attributes";
+import CreateAttributes from "./Components/Attribute/CreateAttributes";
+import Permissions from "./Components/Permission/Permissions";
+import CreatePermissions from "./Components/Permission/CreatePermissions";
+import Roles from "./Components/Role/Roles";
+import CreateRoles from "./Components/Role/CreateRoles";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 

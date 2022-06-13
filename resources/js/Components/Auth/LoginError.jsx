@@ -1,4 +1,4 @@
-import spin from './../src/Spinner.gif'
+import spin from '../../src/Spinner.gif'
 const LoginError=()=>{
     return(
 
