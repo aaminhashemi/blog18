@@ -14,13 +14,13 @@ class ProductServiceProvider extends ServiceProvider
             config()->prepend('sidebar', [
                 "href" => "#products",
                 "id" => "products",
-                "key"=> 55,
+                "key"=> 33,
                 "class" => "iconsminds-shop-4",
                 "title" => "محصولات",
                 "permission" => "manage products",
                 "options" => [
-                    ["icon" => "fa fa-list", "key"=> 56, "title" => "لیست محصولات ها", "url" => '/home/permissions'],
-                    ["icon" => "fa fa-list", "key"=> 56, "title" => "افزودن محصول", "url" => '/home/permissions/create'],
+                    ["icon" => "fa fa-list", "key"=> 331, "title" => "لیست محصولات ها", "url" => '/home/permissions'],
+                    ["icon" => "fa fa-list", "key"=> 332, "title" => "افزودن محصول", "url" => '/home/permissions/create'],
                 ]
             ]);
         });

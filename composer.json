@@ -32,6 +32,7 @@
             "Uploader\\":"modules/Uploader",
             "Brand\\":"modules/Brand",
             "Category\\":"modules/Category",
+            "Company\\":"modules/Company",
             "Attribute\\":"modules/Attribute",
             "Product\\":"modules/Product",
             "RolePermission\\":"modules/RolePermission",

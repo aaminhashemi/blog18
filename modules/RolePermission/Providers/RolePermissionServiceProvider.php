@@ -12,15 +12,15 @@ class RolePermissionServiceProvider extends ServiceProvider
             config()->prepend('sidebar', [
                 "href" => "#roles",
                 "id" => "roles",
-                "key"=> 55,
+                "key"=> 88,
                 "class" => "iconsminds-shop-4",
                 "title" => "نقش های کاربری",
-                "permission" => "manage roles",
+                "permission" => "manage_permissions",
                 "options" => [
-                    ["icon" => "fa fa-list", "key"=> 56, "title" => "دسترسی ها", "url" => '/home/permissions'],
-                    ["icon" => "fa fa-list", "key"=> 56, "title" => "افزودن دسترسی", "url" => '/home/permissions/create'],
-                    ["icon" => "fa fa-list" , "key"=> 562, "title" => "نقش ها", "url" => '/home/roles'],
-                    ["icon" => "fa fa-list" , "key"=> 562, "title" => "افزودن نقش", "url" => '/home/roles/create'],
+                    ["icon" => "fa fa-list", "key"=> 89, "title" => "دسترسی ها", "url" => '/home/permissions'],
+                    ["icon" => "fa fa-list", "key"=> 90, "title" => "افزودن دسترسی", "url" => '/home/permissions/create'],
+                    ["icon" => "fa fa-list" , "key"=> 91, "title" => "نقش ها", "url" => '/home/roles'],
+                    ["icon" => "fa fa-list" , "key"=> 92, "title" => "افزودن نقش", "url" => '/home/roles/create'],
                 ]
             ]);
         });

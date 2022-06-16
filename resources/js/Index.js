@@ -25,6 +25,10 @@ import Permissions from "./Components/Permission/Permissions";
 import CreatePermissions from "./Components/Permission/CreatePermissions";
 import Roles from "./Components/Role/Roles";
 import CreateRoles from "./Components/Role/CreateRoles";
+import Companies from "./Components/Company/Companies";
+import CreateCompanies from "./Components/Company/CreateCompanies";
+import Users from "./Components/User/Users";
+import CreateUsers from "./Components/User/CreateUsers";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 
@@ -45,12 +49,16 @@ function Index() {
                 <Route path="/register" element={<Register/>} />
                 <Route path="/home" element={<Main/>} >
                 <Route path="/home/books" element={<Books/>} />
+                <Route path="/home/users" element={<Users/>} />
                 <Route path="/home/categories" element={<Categories/>} />
+                <Route path="/home/companies" element={<Companies/>} />
                 <Route path="/home/permissions" element={<Permissions/>} />
                 <Route path="/home/roles" element={<Roles/>} />
                 <Route path="/home/brands" element={<Brands/>} />
                 <Route path="/home/attributes" element={<Attributes/>} />
                 <Route path="/home/brands/create" element={<CreateBrands/>} />
+                <Route path="/home/users/create" element={<CreateUsers/>} />
+                <Route path="/home/companies/create" element={<CreateCompanies/>} />
                 <Route path="/home/roles/create" element={<CreateRoles/>} />
                 <Route path="/home/permissions/create" element={<CreatePermissions/>} />
                 <Route path="/home/attributes/create" element={<CreateAttributes/>} />

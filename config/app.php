@@ -170,6 +170,7 @@ return [
         \Category\Providers\CategoryServiceProvider::class,
         \Product\Providers\ProductServiceProvider::class,
         \Attribute\Providers\AttributeServiceProvider::class,
+        \Company\Providers\CompanyServiceProvider::class,
         /*
          * Package Service Providers...
          */

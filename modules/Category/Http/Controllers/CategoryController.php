@@ -5,6 +5,7 @@ namespace Category\Http\Controllers;
 
 
 use Category\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Product\Models\Product;
 use Category\Repositories\CategoryRepository;
 use Category\Models\Category_brand;
@@ -28,7 +29,28 @@ class CategoryController extends Controller
     /////////////////////////////////////////////////
     public function menu()
     {
-        return response()->json(['menu' => config('sidebar')]);
+        $menu= config('sidebar');
+        //dd($menu);
+        $array=[];
+        $user=Auth::user();
+        foreach ($user->roles as $item){
+            $permissions=$item->permissions()->get();
+            foreach ($permissions as $val){
+                $array[] = $val->name;
+            }
+        }
+        foreach ($menu as  $key =>$menu_item){
+            //dd($menu_item['permission']);
+            if(!in_array($menu_item['permission'],$array)){
+                 unset($menu[$key]);
+               //dd($menu_item['permission']);
+              //
+            }
+        }
+        //dd($menu);
+
+        // $menu = (array) $menu;
+        return response()->json(['menu' => array_values($menu)]);
     }
 
     ////////////////////////////////////////////////

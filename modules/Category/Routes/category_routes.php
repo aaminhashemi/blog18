@@ -1,5 +1,5 @@
 <?php
-Route::group(['namespace' => 'Category\Http\Controllers','prefix'=>'api'], function ($router) {
+Route::group(['namespace' => 'Category\Http\Controllers','middleware' => ['web','auth:sanctum'],'prefix'=>'api'], function ($router) {
     $router->get('/category/list','CategoryController@index');
     $router->post('/category/{id}/delete','CategoryController@delete');
     $router->get('/category/non_child/list','CategoryController@parentIndex');
@@ -14,7 +14,7 @@ Route::group(['namespace' => 'Category\Http\Controllers','prefix'=>'api'], funct
     $router->get('/category/{id}/products','CategoryController@categoryProducts');
     $router->get('/category/{id}/products/{standard}','CategoryController@categoryProductsOrder');
     $router->post('/categories/brand/{id}/delete','CategoryController@deleteBrand');
-    $router->post('//category/save/score','CategoryController@saveScore');
+    $router->post('/category/save/score','CategoryController@saveScore');
 
     $router->get('/menu','CategoryController@menu');
 
