@@ -1,7 +1,8 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [createInput, setCreateInput] = useState({
         email: '',
         password: '',
@@ -16,6 +17,8 @@ const Login = () => {
         axios.post(`/api/login`,createInput).then((res)=>{
             if(res.data.status===200){
                 localStorage.setItem('token',res.data.token)
+                navigate("/home");
+
             }else{
                 alert(res.data.message)
             }

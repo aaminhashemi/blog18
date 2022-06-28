@@ -72,7 +72,7 @@ class CompanyController extends Controller
             $this->repository->updateCompany($category, $request);
             return response()->json([
                 'status' => 200,
-                'message' => 'ویرایش دسته با موفقیت انجام شد.'
+                'message' => 'ویرایش شرکت با موفقیت انجام شد.'
             ]);
         } else {
             return response()->json([

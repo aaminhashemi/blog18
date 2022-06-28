@@ -1,7 +1,7 @@
 import React from "react";
 import {
   BrowserRouter as Router , Routes,
-  Route,
+  Route,useNavigate
 } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import {getBooks} from './data/data'
@@ -29,6 +29,7 @@ import Companies from "./Components/Company/Companies";
 import CreateCompanies from "./Components/Company/CreateCompanies";
 import Users from "./Components/User/Users";
 import CreateUsers from "./Components/User/CreateUsers";
+import EditCompany from "./Components/Company/EditCompany";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 
@@ -39,6 +40,17 @@ axios.interceptors.request.use(function (config) {
     config.headers.Authorization=token ?`Bearer ${token}` :'';
     return config;
 });
+
+let isAuthenticated=false;
+const tokenExist = localStorage.getItem('token');
+if(tokenExist!==null){
+    axios.post(`/api/check`).then((res)=>{
+         (res.data.status===200)? isAuthenticated=true : isAuthenticated=false
+    })
+}else{
+    isAuthenticated=false
+
+}
 
 function Index() {
     const book_list = getBooks();
@@ -52,6 +64,7 @@ function Index() {
                 <Route path="/home/users" element={<Users/>} />
                 <Route path="/home/categories" element={<Categories/>} />
                 <Route path="/home/companies" element={<Companies/>} />
+                <Route path="/home/companies/:id/edit" element={<EditCompany/>} />
                 <Route path="/home/permissions" element={<Permissions/>} />
                 <Route path="/home/roles" element={<Roles/>} />
                 <Route path="/home/brands" element={<Brands/>} />

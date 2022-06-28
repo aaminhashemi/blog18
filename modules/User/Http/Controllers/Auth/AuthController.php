@@ -53,9 +53,9 @@ class AuthController extends Controller
         ]);
 
         if ($validator->passes()) {
-            if(filter_var( $request->email ,FILTER_VALIDATE_EMAIL )){
+            if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
                 $user = User::where('email', $request->email)->first();
-            }else{
+            } else {
                 $user = User::where('mobile', $request->email)->first();
             }
 
@@ -88,5 +88,21 @@ class AuthController extends Controller
             'status' => 200,
             'message' => 'شما با موفقیت خارج شدید.'
         ]);
+    }
+
+    public function check()
+    {
+        $user = auth()->user();
+        if ($user){
+            return response()->json([
+                'status' => 200,
+                'message' => 'کاربر معتبر است.'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 403,
+                'message' => 'کاربر معتبر نیست'
+            ]);
+        }
     }
 }
