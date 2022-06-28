@@ -1,6 +1,7 @@
 <?php
 Route::group(['namespace' => 'User\Http\Controllers',  'middleware' => ['web','auth:sanctum'],'prefix'=>'api'], function ($router) {
     $router->get('/user/list','UserController@index');
+    $router->post('/user/save','UserController@save');
     $router->post('/user/add_role','UserController@addRole');
     $router->get('/user/edit/{user}','UserController@find');
     $router->post('/user/update/{user}','UserController@update');

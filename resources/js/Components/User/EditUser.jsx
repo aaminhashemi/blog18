@@ -1,27 +1,29 @@
 import React,{useEffect,useState} from "react";
-import {useHistory, useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CreateUsers = () => {
+const EditUser = () => {
+    const param=useParams();
     const navigate = useNavigate();
-    const [createInput, setCreateInput] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        mobile: '',
-        password: '',
-        type: '',
-        category_id: '',
+    const [user,setUser]=useState([]);
+    const [loading,setLoading]=useState(true);
+    const [errorInput, setErrorInput] = useState({
         errors_list: []
-
     });
     const inputSetter=(e)=>{
-        setCreateInput({...createInput, [e.target.name]: e.target.value})
+        setUser({...user, [e.target.name]: e.target.value})
     }
+    useEffect(()=>{
+        axios.get(`/api/user/edit/${param.id}`).then(res=>{
+            setUser(res.data.user)
+            setLoading(false)
+        })
+    },[])
+
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post(`/api/user/save`, createInput).then(res => {
+        axios.post(`/api/user/update/${param.id}`, user).then(res => {
             if (res.data.status === 200) {
                 Swal.fire({
                     title: 'موفقیت آمیز',
@@ -32,7 +34,7 @@ const CreateUsers = () => {
                 });
                 navigate('/home/users');
             } else if (res.data.status === 403) {
-                setCreateInput({...createInput, errors_list: res.data.validation_errors});
+                setErrorInput({...errorInput, errors_list: res.data.validation_errors});
                 Swal.fire({
                     title: 'ناموفق',
                     text: res.data.message,
@@ -41,7 +43,7 @@ const CreateUsers = () => {
                     showCloseButton: true
                 });
             } else {
-                setCreateInput({...createInput, errors_list: res.data.validation_errors});
+                setErrorInput({...errorInput, errors_list: res.data.validation_errors});
             }
         })
     };
@@ -53,7 +55,6 @@ const CreateUsers = () => {
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
             <div className='col-lg-6 mx-0 my-0 px-2 py-2' style={{'backgroundColor':'white'}}>
-
                 <div className="card row col-lg-12 mx-1">
                     <div className="card-body">
                         <h5 className="card-title">افزودن کاربر جدید</h5>
@@ -62,42 +63,42 @@ const CreateUsers = () => {
                                 <label className="col-sm-3">نام </label>
                                 <div className="col-sm-6">
                                     <input type="text" name='first_name' className="form-control"
-                                           value={createInput.first_name} onChange={inputSetter} />
+                                           value={user.first_name} onChange={inputSetter} />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">نام خانوادگی </label>
                                 <div className="col-sm-6">
                                     <input type="text" name='last_name' className="form-control"
-                                           value={createInput.last_name} onChange={inputSetter} />
+                                           value={user.last_name} onChange={inputSetter} />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">ایمیل </label>
                                 <div className="col-sm-6">
                                     <input type="text" name='email' className="form-control"
-                                           value={createInput.email} onChange={inputSetter} />
+                                           value={user.email} onChange={inputSetter} />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">شماره موبایل </label>
                                 <div className="col-sm-6">
                                     <input type="text" name='mobile' className="form-control"
-                                           value={createInput.mobile} onChange={inputSetter} />
+                                           value={user.mobile} onChange={inputSetter} />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">کلمه عبور </label>
                                 <div className="col-sm-6">
                                     <input type="text" name='password' className="form-control"
-                                           value={createInput.password} onChange={inputSetter} />
+                                           value={user.password} onChange={inputSetter} />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">نوع</label>
                                 <div className="col-sm-6">
                                     <select name='type' className="form-control"
-                                            value={createInput.type} onChange={inputSetter} >
+                                            value={user.type} onChange={inputSetter} >
                                         <option value="user">کاربر عادی</option>
                                         <option value="admin">مدیر</option>
                                     </select>
@@ -118,4 +119,4 @@ const CreateUsers = () => {
     )
 }
 
-export default CreateUsers;
+export default EditUser;
