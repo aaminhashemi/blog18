@@ -30,6 +30,7 @@ import CreateCompanies from "./Components/Company/CreateCompanies";
 import Users from "./Components/User/Users";
 import CreateUsers from "./Components/User/CreateUsers";
 import EditCompany from "./Components/Company/EditCompany";
+import EditCategory from "./Components/Category/EditCategory";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 
@@ -63,6 +64,7 @@ function Index() {
                 <Route path="/home/books" element={<Books/>} />
                 <Route path="/home/users" element={<Users/>} />
                 <Route path="/home/categories" element={<Categories/>} />
+                <Route path="/home/categories/:id/edit" element={<EditCategory/>} />
                 <Route path="/home/companies" element={<Companies/>} />
                 <Route path="/home/companies/:id/edit" element={<EditCompany/>} />
                 <Route path="/home/permissions" element={<Permissions/>} />
