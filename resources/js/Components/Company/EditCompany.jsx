@@ -20,6 +20,7 @@ const EditCompany = () => {
             setCompany(res.data.company)
             setLoading(false)
         })
+
     }, [])
     const submit = (e) => {
         e.preventDefault();
