@@ -10,6 +10,7 @@ const EditUser = () => {
     const [errorInput, setErrorInput] = useState({
         errors_list: []
     });
+
     const inputSetter=(e)=>{
         setUser({...user, [e.target.name]: e.target.value})
     }

@@ -35,12 +35,6 @@ class UserController extends Controller
         return response()->json(['status' => 200, 'user' => $user]);
     }
 
-    public function update(User $user)
-    {
-
-        //return response()->json(['status'=>200,'user'=>$user]);
-    }
-
     public function upload()
     {
         return response()->json(['status' => 200, 'message' => 'hi']);
@@ -67,6 +61,36 @@ class UserController extends Controller
         ]);
         if ($validator->passes()) {
             $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'password' => Hash::make($request->password)
+            ]);
+            return response()->json([
+                'status' => 200,
+                'message' => 'ثبت کاربر با موفقیت انجام شد.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 403,
+                'message' => 'خطا در داده های ارسالی',
+                'validation_errors' => $validator->messages()
+            ]);
+        }
+    }
+    public function update(Request $request,$user)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|min:3|max:20',
+            'last_name' => 'required|string|min:3|max:20',
+            'email' => 'required|email|unique:users,id,email|min:5|max:50',
+            'password' => 'required|string|min:6|max:10',
+            'mobile' => 'required|string|unique:users,id,mobile|min:11|max:11',
+        ]);
+        if ($validator->passes()) {
+            $user = User::where('id', $user)->first();
+            $user->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
