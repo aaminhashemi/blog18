@@ -117,7 +117,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:50',
-            'category_id' => 'nullable',
+            'category_id' => 'nullable|numeric|exists:categories,id',
             'file' => 'nullable|present|image|mimes:jpg,bmp,png,pdf',
         ]);
         $category = Category::where('id', $id)->first();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   BrowserRouter as Router , Routes,
   Route,useNavigate
@@ -32,6 +32,7 @@ import CreateUsers from "./Components/User/CreateUsers";
 import EditCompany from "./Components/Company/EditCompany";
 import EditCategory from "./Components/Category/EditCategory";
 import EditUser from "./Components/User/EditUser";
+import AdminRoute from "./AdminRoute";
 axios.defaults.baseURL='http://127.0.0.1:8000';
 axios.defaults.withCredentials = true;
 
@@ -43,25 +44,20 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-let isAuthenticated=false;
-const tokenExist = localStorage.getItem('token');
-if(tokenExist!==null){
-    axios.post(`/api/check`).then((res)=>{
-         (res.data.status===200)? isAuthenticated=true : isAuthenticated=false
-    })
-}else{
-    isAuthenticated=false
 
-}
+//alert(isAuthenticated)
 
 function Index() {
     const book_list = getBooks();
+
+    //alert(isAuthenticated)
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
-                <Route path="/home" element={<Main/>} >
+
+                <Route path="/home" element={<AdminRoute />} >
                 <Route path="/home/books" element={<Books/>} />
                 <Route path="/home/users" element={<Users/>} />
                 <Route path="/home/users/:id/edit" element={<EditUser/>} />
@@ -83,6 +79,7 @@ function Index() {
                 <Route path="/home/categories/create" element={<CreateCategories/>} />
                 <Route path="/home/books/:id/create" element={<EditBook/>} />
                 </Route>
+
             </Routes>
         </Router>
     );

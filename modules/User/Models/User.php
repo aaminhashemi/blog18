@@ -52,7 +52,7 @@ class User extends Authenticatable
     {
         $t='';
         foreach ($this->roles as $item) {
-            $t.='<li key="'.$item->id.'">'.$item->name.'</li>';
+            $t.='<li style="list-style:none" key="'.$item->id.'"><Link to="/">'.$item->name.'</Link></li>';
         }
         return $t;
 

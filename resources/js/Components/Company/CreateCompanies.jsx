@@ -45,13 +45,11 @@ const CreateCompanies = () => {
     };
 
     return(
-
         <>
             <div className="alert alert-primary" role="alert">
                 <span style={{'textAlign': 'right', 'direction': 'rtl'}}>مسیر کاربر</span>
             </div>
             <div className='col-lg-6 mx-0 my-0 px-2 py-2' style={{'backgroundColor':'white'}}>
-
                 <div className="card row col-lg-12 mx-1">
                     <div className="card-body">
                         <h5 className="card-title">افزودن شرکت جدید</h5>
@@ -75,7 +73,6 @@ const CreateCompanies = () => {
                 </div>
             </div>
         </>
-
     )
 }
 

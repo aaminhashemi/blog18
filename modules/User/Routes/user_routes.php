@@ -9,6 +9,8 @@ Route::group(['namespace' => 'User\Http\Controllers',  'middleware' => ['web','a
 Route::group(['namespace' => 'User\Http\Controllers\Auth',  'prefix'=>'api'], function ($router) {
     $router->post('/register','AuthController@register');
     $router->post('/login','AuthController@login');
+});
+Route::group(['namespace' => 'User\Http\Controllers\Auth','middleware' => ['web','auth:sanctum'],  'prefix'=>'api'], function ($router) {
     $router->post('/check','AuthController@check');
 });
 

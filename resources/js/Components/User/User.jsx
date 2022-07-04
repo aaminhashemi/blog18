@@ -61,6 +61,7 @@ const User = ({item, roles}) => {
             <tr>
                 <td>{item.first_name} </td>
                 <td>{item.last_name} </td>
+                <td>{item.email} </td>
                 <td>{parse(item.role)} </td>
                 <td>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal"

@@ -1,25 +1,25 @@
 import React,{useEffect,useState} from "react";
 import {useNavigate,useParams} from "react-router-dom";
 import Swal from "sweetalert2";
-import axios from "axios";
 
 const EditCategory = () => {
     const param = useParams();
-    const navigate = useNavigate();
+    const navigate=useNavigate();
+    const id=param.id;
     const [picture, setPicture] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [category,setCategory]=useState([]);
     const [categoriesList, setCategoriesList] = useState([]);
-    const [category, setCategory] = useState([]);
     useEffect(()=>{
-        axios.get(`/api/category/edit/${param.id}`).then(res=>{
+        axios.get(`/api/category/edit/${id}`).then(res=>{
             if (res.data.status===200){
                 setCategory(res.data.category)
-                setLoading(false)
             }
         })
-        axios.get(`/api/category/non_child/except/${param.id}`).then(res=>{
+        axios.get(`/api/category/non_child/except/${id}`).then(res=>{
             if (res.data.status===200){
-                setCategoriesList(res.data.categories);
+                setCategoriesList(res.data.categories)
+                setLoading(false)
             }
         })
     },[])
@@ -30,7 +30,6 @@ const EditCategory = () => {
     const inputSetter=(e)=>{
         setCategory({...category, [e.target.name]: e.target.value})
     }
-
     var categories = '';
     if (loading) {
         categories = ''
@@ -47,7 +46,7 @@ const EditCategory = () => {
         formData.append('file', picture.image);
         formData.append('name', category.name);
         formData.append('category_id', category.category_id);
-        axios.post(`/api/category/update/${param.id}`, formData).then(res => {
+        axios.post(`/api/category/update/${id}`, formData).then(res => {
             if (res.data.status === 200) {
                 Swal.fire({
                     title: 'موفقیت آمیز',
@@ -56,7 +55,7 @@ const EditCategory = () => {
                     confirmButtonText: 'باشه',
                     showCloseButton: true
                 });
-                navigate('/home/categories');
+                navigate('/home/categories')
             } else if (res.data.status === 403) {
                 setErrorInput({...errorInput, errors_list: res.data.validation_errors});
                 Swal.fire({
@@ -87,9 +86,6 @@ const EditCategory = () => {
                 <div className="card row col-lg-12 mx-1">
                     <div className="card-body">
                         <h5 className="card-title">افزودن دسته بندی جدید</h5>
-                        {/*
-                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-*/}
                         <form onSubmit={submit} method='post' className='col-lg-12'>
                             <div className="mb-3 row">
                                 <label className="col-sm-3">نام دسته بندی</label>
@@ -101,7 +97,7 @@ const EditCategory = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3">نام دسته بندی</label>
                                 <div className="col-sm-6">
-                                    <select type="text" name='category_id' className="form-control"
+                                    <select name='category_id' className="form-control"
                                             value={category.category_id} onChange={inputSetter} >
                                         <option value="">ندارد</option>
                                         {categories}

@@ -14,8 +14,8 @@ class Role extends Model
     {
         $t='';
         foreach ($this->permissions as $item) {
-             $t.='<li>'.$item->name.'</li>';
+             $t.='<li key='.$item->id.'>'.$item->name.'</li>';
         }
-        return 'llll';
+        return $t;
     }
 }

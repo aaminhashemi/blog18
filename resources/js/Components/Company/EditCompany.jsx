@@ -36,8 +36,6 @@ const EditCompany = () => {
                     showCloseButton: true
                 });
                 navigate('/home/companies')
-
-                // history.push('/home/companies');
             } else if (res.data.status === 403) {
                 setCreateInput({...errorInput, errors_list: res.data.validation_errors});
                 Swal.fire({
